@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Saumya & Shiven — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -531,11 +533,15 @@ section {
 /* ── Welcome Overlay ── */
 .welcome-overlay {
   position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(145deg, #1a0a2e, #3d1560, #2a1040);
+  background: url('utils/card.png') center/cover no-repeat;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center; cursor: pointer;
   padding: 20px;
+}
+.welcome-overlay::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,10,46,.5) 0%, rgba(74,18,89,.3) 40%, rgba(74,18,89,.4) 70%, rgba(26,10,46,.6) 100%);
 }
 .welcome-overlay .welcome-border {
   position: absolute; inset: 8px;
@@ -543,9 +549,11 @@ section {
   border-radius: 4px; pointer-events: none;
 }
 .welcome-overlay .tap-hint {
-  margin-top: 40px;
+  margin-top: 40px; padding: 12px 30px;
   font-family: 'Montserrat', sans-serif; font-weight: 300;
   font-size: 11px; letter-spacing: 4px; color: var(--gold-light);
+  border: 2px solid var(--gold); border-radius: 30px;
+  background: rgba(212,160,23,.1);
   animation: pulse 2s infinite;
 }
 </style>
@@ -554,12 +562,12 @@ section {
 
 <!-- Welcome Overlay -->
 <div id="welcomeOverlay" class="welcome-overlay">
-  <div class="welcome-border"></div>
-  <img src="utils/ganpati%20ji.png" alt="Ganpati" style="width:80px;margin-bottom:15px;filter:drop-shadow(0 0 20px rgba(212,160,23,.5));" />
-  <p style="font-family:'Tiro Devanagari Hindi',serif;font-size:18px;color:#F0D68A;margin-bottom:8px;">॥ श्री गणेशाय नमः ॥</p>
-  <p style="font-family:'Great Vibes',cursive;font-size:clamp(30px,7vw,52px);color:#D4A017;margin:10px 0;">The Sharma Family</p>
-  <p style="font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(9px,2.5vw,12px);letter-spacing:clamp(2px,1vw,5px);color:#F0D68A;">REQUESTS THE PLEASURE OF YOUR COMPANY</p>
-  <p class="tap-hint">TAP TO OPEN</p>
+  <div class="welcome-border" style="z-index:1;"></div>
+  <img src="utils/ganpati%20ji.png" alt="Ganpati" style="position:relative;z-index:1;width:80px;margin-bottom:15px;filter:drop-shadow(0 0 20px rgba(212,160,23,.5));" />
+  <p style="position:relative;z-index:1;font-family:'Tiro Devanagari Hindi',serif;font-size:18px;color:#F0D68A;margin-bottom:8px;">॥ श्री गणेशाय नमः ॥</p>
+  <p style="position:relative;z-index:1;font-family:'Great Vibes',cursive;font-size:clamp(30px,7vw,52px);color:#D4A017;margin:10px 0;">The Sharma Family</p>
+  <p style="position:relative;z-index:1;font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(9px,2.5vw,12px);letter-spacing:clamp(2px,1vw,5px);color:#F0D68A;">REQUESTS THE PLEASURE OF YOUR COMPANY</p>
+  <p class="tap-hint" style="position:relative;z-index:1;">TAP TO OPEN</p>
 </div>
 
 <!-- Background Music -->
@@ -615,7 +623,7 @@ section {
   </div>
   <div class="scratch-wrapper reveal" id="scratchCard">
     <div class="scratch-reveal">
-      <p class="reveal-day">FRIDAY</p>
+      <p class="reveal-day">SATURDAY</p>
       <p class="reveal-date">27th June 2026</p>
       <p class="reveal-hindi">शुभ मुहूर्त</p>
       <p style="margin-top:12px;font-family:'Great Vibes',cursive;font-size:22px;color:var(--gold);">
