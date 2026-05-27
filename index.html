@@ -395,7 +395,7 @@ section {
   font-size: 18px; color: var(--gold-light); margin-bottom: 15px;
 }
 .event-desc {
-  font-size: 17px; color: rgba(255,255,255,.8); line-height: 1.7;
+  font-size: 19px; color: rgba(255,255,255,.8); line-height: 1.7;
   font-style: italic; max-width: 400px; margin: 0 auto;
 }
 .event-extra {
@@ -414,9 +414,9 @@ section {
   .event-content { width: 90%; padding: 20px 15px; }
   .event-name { font-size: clamp(24px, 8vw, 36px); }
   .event-icon { font-size: 36px; }
-  .event-desc { font-size: 13px; }
-  .event-hindi { font-size: 14px; }
-  .event-time-badge { font-size: 10px; padding: 5px 14px; }
+  .event-desc { font-size: 15px; }
+  .event-hindi { font-size: 16px; }
+  .event-time-badge { font-size: 11px; padding: 5px 14px; }
   .event-day-title { font-size: clamp(34px, 10vw, 56px); }
   .tree-line, .tree-line-top { height: 50px; }
 }
@@ -735,21 +735,6 @@ section {
 
 </div>
 
-<!-- ═══════════ COUNTDOWN ═══════════ -->
-<section class="countdown-section" id="countdown-section">
-  <div class="reveal" style="text-align:center">
-    <p class="section-label">Counting Down To</p>
-    <h2 class="section-title">Saumya &amp; Shiven's Big Day</h2>
-    <div class="divider"></div>
-    <div style="display:flex;gap:25px;margin-top:25px;flex-wrap:wrap;justify-content:center;">
-      <div class="cd-unit"><span id="cd-days" class="cd-num">0</span><br><small>Days</small></div>
-      <div class="cd-unit"><span id="cd-hours" class="cd-num">0</span><br><small>Hours</small></div>
-      <div class="cd-unit"><span id="cd-mins" class="cd-num">0</span><br><small>Minutes</small></div>
-      <div class="cd-unit"><span id="cd-secs" class="cd-num">0</span><br><small>Seconds</small></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ FOOTER ═══════════ -->
 <section class="footer">
   <p class="names-footer">Saumya &amp; Shiven</p>
@@ -836,17 +821,6 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .event-slide').forEach(el => observer.observe(el));
-
-// ── Countdown ──
-function updateCountdown() {
-  const diff = new Date('2026-06-27T10:00:00') - new Date();
-  if (diff <= 0) return;
-  document.getElementById('cd-days').textContent  = Math.floor(diff/864e5);
-  document.getElementById('cd-hours').textContent = Math.floor((diff%864e5)/36e5);
-  document.getElementById('cd-mins').textContent  = Math.floor((diff%36e5)/6e4);
-  document.getElementById('cd-secs').textContent  = Math.floor((diff%6e4)/1e3);
-}
-updateCountdown(); setInterval(updateCountdown, 1000);
 
 // ── RSVP ──
 function submitRSVP() {
@@ -935,6 +909,35 @@ musicBtn.addEventListener('click', () => {
       goToSlide(currentSlide - 1);
     }
   });
+
+  // Touch/tap to advance slides on mobile
+  let touchStartY = 0;
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const overlayEl = document.getElementById('welcomeOverlay');
+    if (overlayEl && overlayEl.style.display !== 'none') return;
+
+    const deltaY = touchStartY - e.changedTouches[0].screenY;
+    const deltaX = touchStartX - e.changedTouches[0].screenX;
+
+    // Swipe up or tap → next slide
+    if (deltaY > 50) {
+      goToSlide(currentSlide + 1);
+    }
+    // Swipe down → previous slide
+    else if (deltaY < -50) {
+      goToSlide(currentSlide - 1);
+    }
+    // Simple tap (minimal movement) → next slide
+    else if (Math.abs(deltaY) < 15 && Math.abs(deltaX) < 15) {
+      goToSlide(currentSlide + 1);
+    }
+  }, { passive: true });
 })();
 </script>
 </body>
