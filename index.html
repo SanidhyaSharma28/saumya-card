@@ -174,54 +174,50 @@ section {
   padding: 0 10px; font-size: 12px; color: var(--gold);
 }
 
-/* ── Scratch Card Section ── */
-.scratch-section {
+/* ── Invitation Section ── */
+.invitation-section {
   background: url('utils/bg1.png') center/cover no-repeat;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
-.scratch-section::before {
+.invitation-section::before {
   content: ''; position: absolute; inset: 0;
-  background: rgba(0,0,0,.3);
+  background: rgba(0,0,0,.45);
 }
-.scratch-section > * { position: relative; z-index: 2; }
-.scratch-section .section-label { color: var(--gold-light); }
-.scratch-section .section-title { color: var(--gold); }
-.scratch-wrapper {
-  position: relative; width: 85vw; max-width: 400px; aspect-ratio: 5/3;
-  border-radius: 18px; overflow: hidden;
-  box-shadow: 0 10px 40px rgba(139,0,0,.15);
-  border: 3px solid var(--gold);
-  cursor: pointer; user-select: none; -webkit-user-select: none;
+.invitation-section > * { position: relative; z-index: 2; }
+.invitation-section .section-label { color: var(--gold-light); }
+.invitation-section .section-title { color: var(--gold); }
+.invitation-card {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 40px 35px;
+  max-width: 480px; width: 85vw;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(74,18,89,.3);
 }
-.scratch-reveal {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #fff 0%, var(--gold-pale) 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  z-index: 1;
+.invitation-card .invite-date {
+  font-family: 'Great Vibes', cursive; font-size: 44px; color: var(--gold);
+  margin-bottom: 8px;
 }
-.scratch-reveal .reveal-date {
-  font-family: 'Great Vibes', cursive; font-size: 42px; color: var(--maroon);
+.invitation-card .invite-day {
+  font-family: 'Montserrat', sans-serif; font-size: 13px;
+  letter-spacing: 4px; color: var(--gold-light); text-transform: uppercase;
 }
-.scratch-reveal .reveal-day {
-  font-family: 'Montserrat', sans-serif; font-size: 14px;
-  letter-spacing: 4px; color: var(--gold); margin-top: 4px;
+.invitation-card .invite-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  color: #fff; line-height: 1.7; margin-top: 25px;
 }
-.scratch-reveal .reveal-hindi {
+.invitation-card .invite-hindi {
   font-family: 'Tiro Devanagari Hindi', serif;
-  font-size: 15px; color: var(--maroon); margin-top: 8px; opacity: .7;
+  font-size: 17px; color: var(--gold-light); margin-top: 20px; opacity: .85;
 }
-.scratch-canvas {
-  position: absolute; inset: 0; z-index: 2;
-  border-radius: 15px;
+.invitation-card .invite-names {
+  font-family: 'Great Vibes', cursive; font-size: 26px;
+  color: var(--gold); margin-top: 15px;
 }
-.scratch-hint {
-  font-family: 'Montserrat', sans-serif; font-size: 12px;
-  color: var(--gold-light); margin-top: 15px; letter-spacing: 2px;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
 
 /* ── Ganesh / Blessing ── */
 .blessings {
@@ -314,7 +310,7 @@ section {
 /* ── Venue ── */
 .venue-section {
   background: url('utils/peterhoff%20shimla.jpg') center/cover no-repeat;
-  min-height: 80vh; position: relative;
+  min-height: 100vh; position: relative;
 }
 .venue-section::before {
   content: ''; position: absolute; inset: 0;
@@ -458,7 +454,7 @@ section {
 /* ── Countdown ── */
 .countdown-section {
   background: url('utils/countdown%20bg.jpg') center/cover no-repeat;
-  min-height: 70vh; position: relative;
+  min-height: 100vh; position: relative;
 }
 .countdown-section::before {
   content: ''; position: absolute; inset: 0;
@@ -487,8 +483,29 @@ section {
 
 /* ── Animations ── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.reveal { opacity: 0; transform: translateY(40px); transition: all .8s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUpSoft { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Staggered children animations */
+.reveal.visible .section-label { animation: fadeUpSoft 0.8s 0.1s both; }
+.reveal.visible .section-title { animation: fadeUpSoft 0.9s 0.25s both; }
+.reveal.visible .divider { animation: fadeIn 0.8s 0.4s both; }
+.reveal.visible .invite-text,
+.reveal.visible .invite-date,
+.reveal.visible .invite-day,
+.reveal.visible .invite-hindi,
+.reveal.visible .invite-names { animation: fadeUpSoft 0.8s 0.5s both; }
+.reveal.visible .event-time-badge { animation: fadeUpSoft 0.7s 0.15s both; }
+.reveal.visible .event-icon { animation: fadeUpSoft 0.7s 0.25s both; }
+.reveal.visible .event-name { animation: fadeUpSoft 0.8s 0.35s both; }
+.reveal.visible .event-hindi { animation: fadeUpSoft 0.7s 0.45s both; }
+.reveal.visible .event-desc { animation: fadeUpSoft 0.8s 0.55s both; }
+.reveal.visible .event-extra { animation: fadeUpSoft 0.7s 0.65s both; }
+.reveal.visible .cd-unit { animation: fadeUpSoft 0.7s 0.3s both; }
+.reveal.visible .ganesh-shloka { animation: fadeUpSoft 1s 0.2s both; }
 
 /* ── Responsive (mobile-first) ── */
 @media (max-width: 700px) {
@@ -501,10 +518,10 @@ section {
   .shubh { font-size: 15px; }
   .scroll-hint { font-size: 10px; bottom: 20px; }
 
-  .scratch-wrapper { width: 90vw; max-width: 360px; }
-  .scratch-reveal .reveal-date { font-size: 30px; }
-  .scratch-reveal .reveal-day { font-size: 12px; }
-  .scratch-hint { font-size: 11px; }
+  .invitation-card { padding: 30px 22px; }
+  .invitation-card .invite-date { font-size: 34px; }
+  .invitation-card .invite-text { font-size: 17px; }
+  .invitation-card .invite-hindi { font-size: 15px; }
 
   .section-title { font-size: clamp(28px, 8vw, 48px); }
   .section-label { font-size: 10px; letter-spacing: 4px; }
@@ -519,7 +536,7 @@ section {
   .couple-name-side p { font-size: 14px; }
   .couple-amp { font-size: 28px; }
 
-  .venue-section { min-height: 60vh; }
+  .venue-section { min-height: 100vh; }
 
   .timeline::before { left: 20px; }
   .timeline-item, .timeline-item:nth-child(odd) { flex-direction: row; }
@@ -614,28 +631,24 @@ section {
       <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light);font-weight:300;margin-top:4px;">S/o Smt. Mamta &amp; Dr. Suresh</span>
     </h1>
   </div>
-  <div class="scroll-hint">SCROLL DOWN<span>↓</span></div>
 </section>
 
-<!-- ═══════════ SCRATCH CARD — REVEAL THE DATE ═══════════ -->
-<section class="scratch-section" id="scratch">
+<!-- ═══════════ INVITATION — SAVE THE DATE ═══════════ -->
+<section class="invitation-section" id="invitation">
   <div class="reveal" style="text-align:center">
-    <p class="section-label">Save the Date</p>
-    <h2 class="section-title">Scratch to Reveal</h2>
+    <h2 class="section-title">Invite You</h2>
     <div class="divider"></div>
   </div>
-  <div class="scratch-wrapper reveal" id="scratchCard">
-    <div class="scratch-reveal">
-      <p class="reveal-day">SATURDAY</p>
-      <p class="reveal-date">27th June 2026</p>
-      <p class="reveal-hindi">शुभ मुहूर्त</p>
-      <p style="margin-top:12px;font-family:'Great Vibes',cursive;font-size:22px;color:var(--gold);">
-        Saumya &amp; Shiven
-      </p>
-    </div>
-    <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+  <div class="invitation-card reveal">
+    <p class="invite-day">Saturday</p>
+    <p class="invite-date">27th June 2026</p>
+    <p class="invite-text">
+      With the blessings of our elders and the grace of God,<br>
+      we cordially invite you to celebrate the union of<br>
+    </p>
+    <p class="invite-names">Saumya & Shiven</p>
   </div>
-  </section>
+</section>
 
 <!-- ═══════════ VENUE ═══════════ -->
 <section class="venue-section" id="venue">
@@ -744,6 +757,7 @@ section {
   <p style="margin-top:15px;font-size:18px;color:var(--gold-light);font-family:'Tiro Devanagari Hindi',serif;">
     आपकी उपस्थिति ही हमारा आशीर्वाद है
   </p>
+  <p style="margin-top:25px;font-family:'Montserrat',sans-serif;font-weight:400;font-size:12px;letter-spacing:3px;color:var(--gold);">RSVP — SHARMA FAMILY</p>
 </section>
 
 <script>
@@ -867,91 +881,60 @@ musicBtn.addEventListener('click', () => {
   }
 });
 
-// ── Scratch Card ──
-(function initScratch() {
-  const canvas = document.getElementById('scratchCanvas');
-  const wrapper = document.getElementById('scratchCard');
-  const ctx = canvas.getContext('2d');
-  let isScratching = false;
-  let totalArea, scratchedPixels = 0, revealed = false;
 
-  function setupCanvas() {
-    const rect = wrapper.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    totalArea = canvas.width * canvas.height;
 
-    // Gold scratch layer with pattern
-    const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    grad.addColorStop(0, '#6B2D8B');
-    grad.addColorStop(0.3, '#4A1259');
-    grad.addColorStop(0.5, '#9B59B6');
-    grad.addColorStop(0.7, '#D4A017');
-    grad.addColorStop(1, '#4A1259');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+// ── PPT Mode: Spacebar to advance slides ──
+(function pptMode() {
+  const slides = document.querySelectorAll('section, .event-slide');
+  let currentSlide = 0;
+  let transitioning = false;
 
-    // Add decorative text
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-    ctx.font = '16px Montserrat, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('✦  SCRATCH HERE  ✦', canvas.width/2, canvas.height/2 - 10);
-    ctx.font = '13px Montserrat, sans-serif';
-    ctx.fillText('Reveal the wedding date', canvas.width/2, canvas.height/2 + 15);
-
-    // Decorative border dots
-    ctx.fillStyle = 'rgba(212, 160, 23, 0.3)';
-    for (let i = 0; i < canvas.width; i += 12) {
-      ctx.beginPath(); ctx.arc(i, 4, 1.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(i, canvas.height-4, 1.5, 0, Math.PI*2); ctx.fill();
-    }
-    for (let i = 0; i < canvas.height; i += 12) {
-      ctx.beginPath(); ctx.arc(4, i, 1.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(canvas.width-4, i, 1.5, 0, Math.PI*2); ctx.fill();
-    }
+  function goToSlide(index) {
+    if (transitioning) return;
+    if (index < 0 || index >= slides.length) return;
+    transitioning = true;
+    
+    // Create a dark overlay for transition
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#1a0a2e;opacity:0;transition:opacity 0.5s ease;pointer-events:none;';
+    document.body.appendChild(overlay);
+    
+    // Fade to dark
+    requestAnimationFrame(() => { overlay.style.opacity = '1'; });
+    
+    setTimeout(() => {
+      currentSlide = index;
+      slides[currentSlide].scrollIntoView({ behavior: 'instant' });
+      // Trigger reveal animations
+      slides[currentSlide].classList.add('visible');
+      const reveals = slides[currentSlide].querySelectorAll('.reveal');
+      reveals.forEach(r => r.classList.add('visible'));
+      
+      // Fade from dark
+      overlay.style.opacity = '0';
+      setTimeout(() => { overlay.remove(); transitioning = false; }, 500);
+    }, 500);
   }
 
-  function scratch(x, y) {
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.beginPath();
-    ctx.arc(x, y, 22, 0, Math.PI * 2);
-    ctx.fill();
-    checkReveal();
-  }
-
-  function checkReveal() {
-    if (revealed) return;
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let transparent = 0;
-    for (let i = 3; i < imageData.data.length; i += 4) {
-      if (imageData.data[i] === 0) transparent++;
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      const overlayEl = document.getElementById('welcomeOverlay');
+      if (overlayEl && overlayEl.style.display !== 'none') {
+        overlayEl.click();
+        return;
+      }
+      goToSlide(currentSlide + 1);
     }
-    const percent = transparent / (canvas.width * canvas.height);
-    if (percent > 0.45) {
-      revealed = true;
-      canvas.style.transition = 'opacity .8s';
-      canvas.style.opacity = '0';
-      setTimeout(() => { canvas.style.display = 'none'; }, 800);
+    if (e.code === 'ArrowRight' || e.code === 'ArrowDown') {
+      e.preventDefault();
+      goToSlide(currentSlide + 1);
     }
-  }
-
-  function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches ? e.touches[0] : e;
-    return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
-  }
-
-  canvas.addEventListener('mousedown', (e) => { isScratching = true; const p = getPos(e); scratch(p.x, p.y); });
-  canvas.addEventListener('mousemove', (e) => { if (!isScratching) return; const p = getPos(e); scratch(p.x, p.y); });
-  canvas.addEventListener('mouseup', () => isScratching = false);
-  canvas.addEventListener('mouseleave', () => isScratching = false);
-
-  canvas.addEventListener('touchstart', (e) => { e.preventDefault(); isScratching = true; const p = getPos(e); scratch(p.x, p.y); }, { passive: false });
-  canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!isScratching) return; const p = getPos(e); scratch(p.x, p.y); }, { passive: false });
-  canvas.addEventListener('touchend', () => isScratching = false);
-
-  setupCanvas();
-  window.addEventListener('resize', () => { if (!revealed) setupCanvas(); });
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowUp') {
+      e.preventDefault();
+      goToSlide(currentSlide - 1);
+    }
+  });
 })();
 </script>
 </body>
