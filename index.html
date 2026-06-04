@@ -395,7 +395,7 @@ section {
   font-size: 18px; color: var(--gold-light); margin-bottom: 15px;
 }
 .event-desc {
-  font-size: 19px; color: rgba(255,255,255,.8); line-height: 1.7;
+  font-size: 20px; color: rgba(255,255,255,.85); line-height: 1.7;
   font-style: italic; max-width: 400px; margin: 0 auto;
 }
 .event-extra {
@@ -414,7 +414,7 @@ section {
   .event-content { width: 90%; padding: 20px 15px; }
   .event-name { font-size: clamp(24px, 8vw, 36px); }
   .event-icon { font-size: 36px; }
-  .event-desc { font-size: 15px; }
+  .event-desc { font-size: 16px; }
   .event-hindi { font-size: 16px; }
   .event-time-badge { font-size: 11px; padding: 5px 14px; }
   .event-day-title { font-size: clamp(34px, 10vw, 56px); }
@@ -474,9 +474,15 @@ section {
 
 /* ── Footer ── */
 .footer {
-  background: linear-gradient(180deg, #3a1768, #2d1150);
-  color: var(--gold-light); padding: 50px 20px; text-align: center; min-height: auto;
+  background: url('utils/green.jpg') center/cover no-repeat;
+  color: var(--gold-light); padding: 50px 20px; text-align: center; min-height: 100vh;
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
+.footer::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(0,0,0,.45);
+}
+.footer > * { position: relative; z-index: 2; }
 .footer .names-footer { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--gold); }
 .footer .tagline { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 12px; letter-spacing: 4px; margin-top: 8px; }
 .footer .hashtag { margin-top: 18px; font-family: 'Montserrat', sans-serif; font-size: 14px; letter-spacing: 2px; color: var(--gold); }
@@ -636,17 +642,16 @@ section {
 <!-- ═══════════ INVITATION — SAVE THE DATE ═══════════ -->
 <section class="invitation-section" id="invitation">
   <div class="reveal" style="text-align:center">
-    <h2 class="section-title">Invite You</h2>
+    <h2 class="section-title">Request the Pleasure of Your Company</h2>
+    <h2 class="section-title">On</h2>
     <div class="divider"></div>
   </div>
   <div class="invitation-card reveal">
     <p class="invite-day">Saturday</p>
     <p class="invite-date">27th June 2026</p>
-    <p class="invite-text">
-      With the blessings of our elders and the grace of God,<br>
-      we cordially invite you to celebrate the union of<br>
-    </p>
-    <p class="invite-names">Saumya & Shiven</p>
+    <div class="divider" style="margin:20px auto;"></div>
+    <p class="invite-text" style="margin-top:0;">To bless the Union of</p>
+    <p class="invite-names">Saumya &amp; Shiven</p>
   </div>
 </section>
 
@@ -656,11 +661,11 @@ section {
     <p class="section-label">Venue</p>
     <h2 class="section-title" style="color:var(--gold);">The Peterhof, Shimla</h2>
     <div class="divider"></div>
-    <p style="font-size:19px;color:var(--gold-light);line-height:1.9;max-width:500px;margin:0 auto;">
+    <p style="font-size:22px;color:var(--gold-light);line-height:1.9;max-width:500px;margin:0 auto;">
       The Peterhof, Shimla<br>
       Chaura Maidan Road, Near Vidhan Sabha<br>
       Shimla, Himachal Pradesh – 171004<br><br>
-      <span style="font-size:14px;letter-spacing:2px;font-family:'Montserrat',sans-serif;color:var(--gold);">
+      <span style="font-size:16px;letter-spacing:2px;font-family:'Montserrat',sans-serif;color:var(--gold);">
         📍 OVERLOOKING THE MAJESTIC HIMALAYAS
       </span>
     </p>
@@ -737,12 +742,10 @@ section {
 
 <!-- ═══════════ FOOTER ═══════════ -->
 <section class="footer">
-  <p class="names-footer">Saumya &amp; Shiven</p>
-  <p class="tagline">27 · 06 · 2026</p>
-  <p style="margin-top:15px;font-size:18px;color:var(--gold-light);font-family:'Tiro Devanagari Hindi',serif;">
-    आपकी उपस्थिति ही हमारा आशीर्वाद है
+  <p style="font-size:22px;color:var(--gold-light);font-family:'Tiro Devanagari Hindi',serif;line-height:1.8;max-width:500px;">
+    खुशियों के इस पावन अवसर पर<br>आपका साथ हमारे लिए सबसे बड़ा उपहार है।<br>कृपया पधारकर आशीर्वाद दें।
   </p>
-  <p style="margin-top:25px;font-family:'Montserrat',sans-serif;font-weight:400;font-size:12px;letter-spacing:3px;color:var(--gold);">RSVP — SHARMA FAMILY</p>
+  <p style="margin-top:35px;font-family:'Montserrat',sans-serif;font-weight:400;font-size:16px;letter-spacing:3px;color:var(--gold);">RSVP — SHARMA FAMILY</p>
 </section>
 
 <script>
